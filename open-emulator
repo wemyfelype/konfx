@@ -1,0 +1,2 @@
+#!/bin/bash
+cd /home/jocelio/dev/Android/Sdk/tools/ && ./emulator -avd Galaxy_Nexus_API_19
