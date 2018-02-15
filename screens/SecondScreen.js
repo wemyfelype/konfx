@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import {Text, View, Button} from 'react-native';
 // import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
+
 export default class SecondScreen extends React.Component {
     static navigationOptions = {
         tapBarLabel: 'Second Screen',
