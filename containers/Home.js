@@ -9,12 +9,12 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 export default class Home extends React.Component {
     static navigationOptions = {
         tapBarLabel: 'Home',
-        drawerIcon: ({tinColor}) => {return(
+        drawerIcon: ({tinColor}) => (
             <MaterialIcons
             name="home"
             size={24}
             style={{color:tinColor}}/>
-        );}
+        )
     };
     render() {
         return (
