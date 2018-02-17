@@ -3,19 +3,13 @@
  */
 import React, { Component } from 'react';
 import {Text, View, Button} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import MenuSettings from './MenuSettings'
 
 
-export default class AppLogin extends React.Component {
-    static navigationOptions = {
-        tapBarLabel: 'Login ...',
-        drawerIcon: ({tinColor}) => {return(
-            <MaterialIcons
-            name="account-box"
-            size={24}
-            style={{color:tinColor}}/>
-        );}
-    };
+export default class AppLogin extends Component {
+
+    static navigationOptions = MenuSettings({login:'Login',iconName:'account-box'});
+
     render() {
         return (
             <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
@@ -23,9 +17,7 @@ export default class AppLogin extends React.Component {
                     Login
                 </Text>
                 <Button onPress={() => this.props.navigation.navigate('DrawerOpen')}
-                    title={'Open DrawNavigator'}>
-
-                </Button>
+                    title={'Open DrawNavigator'}/>
             </View>
 
         );
