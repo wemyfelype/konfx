@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import {Text, View, Button} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-// import Icon from 'react-native-vector-icons/Ionicons';
+
 export default class FirstScreen extends React.Component {
     static navigationOptions = {
         tapBarLabel: 'First screen',
@@ -12,9 +12,7 @@ export default class FirstScreen extends React.Component {
             <MaterialIcons
                 name="change-history"
                 size={24}
-                style={{color:tinColor}}>
-
-            </MaterialIcons>
+                style={{color:tinColor}}/>
         );}
     };
     render() {
