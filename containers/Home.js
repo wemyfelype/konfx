@@ -1,32 +1,33 @@
 /**
  * Created by jocelio on 14/02/18.
  */
-import React, { Component } from 'react';
-import {Text, View, Button} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+
+import React, { Component } from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import { Icon, Button, Container, Header, Content, Left } from 'native-base'
+import MenuSettings from "./MenuSettings";
+import CustomHeader from '../components/CustomHeader'
 
 
-export default class Home extends React.Component {
-    static navigationOptions = {
-        tapBarLabel: 'Home',
-        drawerIcon: ({tinColor}) => (
-            <MaterialIcons
-            name="home"
-            size={24}
-            style={{color:tinColor}}/>
-        )
-    };
+export default class Home extends Component {
+
+    static navigationOptions = MenuSettings({login:'Home',iconName:'home'});
+
     render() {
         return (
-            <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontSize:30, color:'purple'}}>
-                    Home
-                </Text>
-                <Button onPress={() => this.props.navigation.navigate('DrawerOpen')}
-                    title={'Open DrawNavigator'}>
+            <Container>
 
-                </Button>
-            </View>
+                <CustomHeader title="Home" drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
+
+                <Content
+                    contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
+                    <Button
+                        onPress={() => this.props.navigation.navigate('Settings')} full>
+                        <Text style={{ color: 'white' }}>Go To Settings Screen</Text>
+                    </Button>
+                </Content>
+
+            </Container>
 
         );
     }

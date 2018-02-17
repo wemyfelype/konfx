@@ -3,18 +3,12 @@
  */
 import React, { Component } from 'react';
 import {Text, View, Button} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import MenuSettings from "./MenuSettings";
 
-export default class SecondScreen extends React.Component {
-    static navigationOptions = {
-        tapBarLabel: 'Second Screen',
-        drawerIcon: ({tinColor}) => {return(
-            <MaterialIcons
-            name="card-membership"
-            size={24}
-            style={{color:tinColor}}/>
-        );}
-    };
+export default class SecondScreen extends Component {
+
+    static navigationOptions = MenuSettings({login:'Second Screen',iconName:'card-membership'});
+
     render() {
         return (
             <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
@@ -22,9 +16,7 @@ export default class SecondScreen extends React.Component {
                     Second Screen
                 </Text>
                 <Button onPress={() => this.props.navigation.navigate('DrawerOpen')}
-                    title={'Open DrawNavigator'}>
-
-                </Button>
+                    title={'Open DrawNavigator'}/>
             </View>
 
         );

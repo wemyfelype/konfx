@@ -3,18 +3,12 @@
  */
 import React, { Component } from 'react';
 import {Text, View, Button} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import MenuSettings from "./MenuSettings";
 
-export default class FirstScreen extends React.Component {
-    static navigationOptions = {
-        tapBarLabel: 'First screen',
-        drawerIcon: ({tinColor}) => {return(
-            <MaterialIcons
-                name="change-history"
-                size={24}
-                style={{color:tinColor}}/>
-        );}
-    };
+export default class FirstScreen extends Component {
+
+    static navigationOptions = MenuSettings({login:'First screen',iconName:'change-history'});
+
     render() {
         return (
             <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
@@ -22,8 +16,8 @@ export default class FirstScreen extends React.Component {
                     First Screen ;)
                 </Text>
                 <Button onPress={() => this.props.navigation.navigate('DrawerOpen')}
-                        title={'Open DrawNavigator'}>
-                </Button>
+                        title={'Open DrawNavigator'}/>
+
             </View>
 
         );
