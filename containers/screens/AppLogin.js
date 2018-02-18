@@ -30,7 +30,7 @@ export default class AppLogin extends Component {
                         <Text style={styles.text}>An app made using React Native :)</Text>
                     </View>
                     <View style={styles.formContainer}>
-                        <LoginForm />
+                        <LoginForm navigation={this.props.navigation}/>
                     </View>
 
                 </Content>
