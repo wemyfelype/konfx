@@ -2,24 +2,32 @@
  * Created by jocelio on 14/02/18.
  */
 import React, { Component } from 'react';
-import {Text, View, Button} from 'react-native';
-import MenuSettings from "./MenuSettings";
+import { Text } from "react-native";
+import { Button, Container, Content} from 'native-base'
+import MenuSettings from './commom/MenuSettings'
+import CustomHeader from '../components/CustomHeader'
+import Home from "./Home";
 
 export default class FirstScreen extends Component {
 
-    static navigationOptions = MenuSettings({login:'First screen',iconName:'change-history'});
+    static navigationOptions = MenuSettings({label:'First Screen',iconName:'change-history'});
 
     render() {
         return (
-            <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontSize:30, color:'red'}}>
-                    First Screen ;)
-                </Text>
-                <Button onPress={() => this.props.navigation.navigate('DrawerOpen')}
-                        title={'Open DrawNavigator'}/>
+            <Container>
 
-            </View>
+                <CustomHeader title={FirstScreen.navigationOptions.tapBarLabel} drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
 
+                <Content contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
+
+                    <Text>First Screen</Text>
+
+                    <Button onPress={() => this.props.navigation.navigate('Home')} full>
+                        <Text style={{ color: 'white' }}>Go To Home Screen</Text>
+                    </Button>
+                </Content>
+
+            </Container>
         );
     }
 }
