@@ -2,20 +2,15 @@
  * Created by jocelio on 15/02/18.
  */
 import React from 'react';
-import { DrawerNavigator } from 'react-navigation';
+import {DrawerNavigator, StackNavigator, TabNavigator} from 'react-navigation';
 import FirstScreen from './containers/screens/FirstScreen'
 import SecondScreen from './containers/screens/SecondScreen'
-import Home from './containers/screens/Home'
 import AppLogin from './containers/screens/AppLogin'
+import Home from './containers/screens/Home'
 import CustomDrawerContent from './containers/common/CustomDrawerContent'
 
-
-export default DrawerNavigator(
+const SignedIn = DrawerNavigator(
     {
-        Login:{
-            path:'/',
-            screen: AppLogin,
-        },
         Home:{
             path:'/home',
             screen: Home,
@@ -30,7 +25,7 @@ export default DrawerNavigator(
         }
     },
     {
-        initialRouteName:'Login',
+        initialRouteName:'Home',
         drawerPosition:'left',
         drawerWidth: 300,
         contentOptions:{
@@ -42,6 +37,32 @@ export default DrawerNavigator(
         drawerToggleRoute: 'DrawerToggle'
     }
 );
+
+const SignedOut = DrawerNavigator({ Login:{path:'/login', screen: AppLogin}}, {initialRouteName:'Login'});
+
+export const createRootNavigator = (signedIn = false) => {
+    return StackNavigator(
+        {
+            SignedIn: {
+                screen: SignedIn,
+                navigationOptions: {
+                    gesturesEnabled: false
+                }
+            },
+            SignedOut: {
+                screen: SignedOut,
+                navigationOptions: {
+                    gesturesEnabled: false
+                }
+            }
+        },
+        {
+            headerMode: "none",
+            mode: "modal",
+            initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+        }
+    );
+};
 
 
 
