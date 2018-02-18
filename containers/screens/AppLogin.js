@@ -2,28 +2,37 @@
  * Created by jocelio on 14/02/18.
  */
 import React, { Component } from 'react';
-import { Text } from "react-native";
-import { Button, Container, Content} from 'native-base'
+import { Image, View, StyleSheet, Text } from "react-native";
+import { Container, Content} from 'native-base'
 import MenuSettings from '../common/MenuSettings'
-import CustomHeader from '../common/CustomHeader'
+import Images from '../../assets/images'
+import LoginForm from '../../components/LoginForm'
 
 
 export default class AppLogin extends Component {
 
     static navigationOptions = MenuSettings({label:'Login',iconName:'account-box'});
+    //     static navigationOptions = {
+    //         drawerLabel: () => null
+    //     }
 
     render() {
         return (
             <Container>
 
-                <CustomHeader title={AppLogin.navigationOptions.tapBarLabel} drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
+                <Content contentContainerStyle={styles.content}>
 
-                <Content contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
+                    <View style={styles.logoContainer}>
+                        <Image
+                            style={styles.logo}
+                            source={Images.loginLogo}
+                        />
+                        <Text style={styles.text}>An app made using React Native :)</Text>
+                    </View>
+                    <View style={styles.formContainer}>
+                        <LoginForm />
+                    </View>
 
-                <Text>App Login {this.navigationOptions}</Text>
-                    <Button onPress={() => this.props.navigation.navigate('Home')} full>
-                        <Text style={{ color: 'white' }}>Go To Home Screen</Text>
-                    </Button>
                 </Content>
 
             </Container>
@@ -31,3 +40,29 @@ export default class AppLogin extends Component {
     }
 }
 
+const styles = StyleSheet.create({
+    content:{
+          flex: 1
+        , flexGrow:1
+        , alignItems: 'center'
+        , justifyContent: 'center'
+        , padding: 10
+        , backgroundColor:'#3498db'
+    },
+    logo:{
+        width:110
+        , height:110
+    },
+    text:{
+        color:'#fff'
+        , marginTop:10
+        , fontSize:22
+    },
+    logoContainer:{
+         alignItems: 'center'
+        , justifyContent: 'center'
+    },
+    formContainer:{
+        width: '100%'
+    }
+});
