@@ -17,7 +17,7 @@ export default class AppLogin extends Component {
                     Login
                 </Text>
                 <Button onPress={() => this.props.navigation.navigate('DrawerOpen')}
-                    title={'Open DrawNavigator'}/>
+                    title={'Open DrawNavigator'}/> 
             </View>
 
         );
