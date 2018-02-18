@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Header, Body, Title, Content, Left, Icon, Right } from 'native-base'
+import { Header, Body, Title, Left, Icon, Right } from 'native-base'
 
 class CustomHeader extends Component {
     render() {

@@ -4,23 +4,24 @@
 import React, { Component } from 'react';
 import { Text } from "react-native";
 import { Button, Container, Content} from 'native-base'
-import MenuSettings from './common/MenuSettings'
-import CustomHeader from '../components/CustomHeader'
+import MenuSettings from '../common/MenuSettings'
+import CustomHeader from '../common/CustomHeader'
+import Home from './Home'
 
+export default class FirstScreen extends Component {
 
-export default class AppLogin extends Component {
-
-    static navigationOptions = MenuSettings({label:'Login',iconName:'account-box'});
+    static navigationOptions = MenuSettings({label:'First Screen',iconName:'change-history'});
 
     render() {
         return (
             <Container>
 
-                <CustomHeader title={AppLogin.navigationOptions.tapBarLabel} drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
+                <CustomHeader title={FirstScreen.navigationOptions.tapBarLabel} drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
 
                 <Content contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
 
-                <Text>App Login {this.navigationOptions}</Text>
+                    <Text>First Screen</Text>
+
                     <Button onPress={() => this.props.navigation.navigate('Home')} full>
                         <Text style={{ color: 'white' }}>Go To Home Screen</Text>
                     </Button>
