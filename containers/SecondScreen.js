@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {Text} from "react-native";
 import {Button, Container, Content} from 'native-base'
-import MenuSettings from './commom/MenuSettings'
+import MenuSettings from './common/MenuSettings'
 import CustomHeader from '../components/CustomHeader'
 
 export default class SecondScreen extends Component {
