@@ -41,8 +41,7 @@ const SignedIn = DrawerNavigator(
 const SignedOut = DrawerNavigator({ Login:{path:'/login', screen: AppLogin}}, {initialRouteName:'Login'});
 
 export const createRootNavigator = (signedIn = false) => {
-    return StackNavigator(
-        {
+    return StackNavigator({
             SignedIn: {
                 screen: SignedIn,
                 navigationOptions: {
@@ -59,7 +58,7 @@ export const createRootNavigator = (signedIn = false) => {
         {
             headerMode: "none",
             mode: "modal",
-            initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+            initialRouteName: !signedIn ? "SignedIn" : "SignedOut"
         }
     );
 };

@@ -2,17 +2,34 @@
  * Created by jocelio on 14/02/18.
  */
 import React, {Component} from "react";
-import {Text} from "react-native";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import {Text, View, ListView, ActivityIndicator, StyleSheet} from "react-native";
 import {Button, Container, Content} from 'native-base'
 import MenuSettings from "../common/MenuSettings";
 import CustomHeader from '../common/CustomHeader'
 import {onSignOut} from "../../auth/auth";
 
-export default class Home extends Component {
+import * as Actions from '../../actions';
+
+class Home extends Component {
 
     static navigationOptions = MenuSettings({label:'Home',iconName:'home'});
 
+
+    constructor(props) {
+        super(props);
+        this.state = {loading:false};
+
+        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = {
+            ds: ds
+        };
+    }
+
     render() {
+
+        console.log(this.props.loading)
         return (
             <Container>
 
@@ -20,16 +37,91 @@ export default class Home extends Component {
 
                 <Content contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
 
-                    <Text>Home Screen</Text>
+                    <Text>Home Screen :D</Text>
 
                     <Button onPress={() => onSignOut().then(() => this.props.navigation.navigate("SignedOut"))}
                     full>
-                        <Text style={{ color: 'white' }}>Logout</Text>
+                        <Text style={{ color: 'white' }}>Sair</Text>
                     </Button>
+
+                    {(this.props.loading) ? (
+                        <View style={styles.activityIndicatorContainer}>
+                            <ActivityIndicator
+                            animating={true}
+                            style={[{height: 80}]}
+                            size="small"
+                            />
+                        </View>
+                        ):(
+                        <View style={{flex:1, backgroundColor: '#F5F5F5', paddingTop:20}}>
+                            <ListView enableEmptySections={true}
+                            dataSource={this.state.ds.cloneWithRows(this.props.data)}
+                            renderRow={this.renderRow.bind(this)}/>
+                        </View>
+                        )}
+
+                    <ListView enableEmptySections={true}
+                              dataSource={this.state.ds.cloneWithRows(this.props.data)}
+                              renderRow={this.renderRow.bind(this)}/>
+
                 </Content>
 
             </Container>
         );
     }
+
+    renderRow(rowData, sectionID, rowID) {
+        return (
+            <View style={styles.row}>
+                <Text style={styles.title}>
+                    {(parseInt(rowID) + 1)}{". "}{rowData.title}
+                </Text>
+                <Text style={styles.description}>
+                    {rowData.description}
+                </Text>
+            </View>
+        )
+    }
+
 }
+
+function mapStateToProps(state, props) {
+    return {
+        loading: state.dataReducer.loading,
+        data: state.dataReducer.data
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
+
+
+const styles = StyleSheet.create({
+    activityIndicatorContainer:{
+        backgroundColor: "#fff",
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+
+    row:{
+        borderBottomWidth: 1,
+        borderColor: "#ccc",
+        // height: 50,
+        padding: 10
+    },
+
+    title:{
+        fontSize: 15,
+        fontWeight: "600"
+    },
+
+    description:{
+        marginTop: 5,
+        fontSize: 14,
+    }
+});
 
