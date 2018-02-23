@@ -4,7 +4,7 @@
 import React, {Component} from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {Text, View, ListView, ActivityIndicator, StyleSheet} from "react-native";
+import {Text, View, ListView, ActivityIndicator, StyleSheet, Alert} from "react-native";
 import {Button, Container, Content} from 'native-base'
 import MenuSettings from "../common/MenuSettings";
 import CustomHeader from '../common/CustomHeader'
@@ -27,15 +27,33 @@ class Home extends Component {
         };
     }
 
+    componentDidMount() {
+        this.props.getData();
+    }
+
     render() {
 
-        console.log(this.props.loading)
+        const comp = (this.props.loading) ?
+            <View style={styles.activityIndicatorContainer}>
+                <ActivityIndicator
+                    animating={true}
+                    style={[{height: 80, width:80}]}
+                    size="large"
+                />
+            </View>
+            :
+            <View style={{flex:1, backgroundColor: '#F5F5F5', paddingTop:20}}>
+                <ListView enableEmptySections={true}
+                          dataSource={this.state.ds.cloneWithRows(this.props.data)}
+                          renderRow={this.renderRow.bind(this)}/>
+            </View>
+
         return (
             <Container>
 
                 <CustomHeader title={Home.navigationOptions.tapBarLabel} drawerOpen={() => this.props.navigation.navigate('DrawerOpen')} />
 
-                <Content contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
+                <Content contentContainerStyle={{ flex: 2, alignItems: 'center', justifyContent: 'center', padding: 10 }}>
 
                     <Text>Home Screen :D</Text>
 
@@ -44,25 +62,7 @@ class Home extends Component {
                         <Text style={{ color: 'white' }}>Sair</Text>
                     </Button>
 
-                    {(this.props.loading) ? (
-                        <View style={styles.activityIndicatorContainer}>
-                            <ActivityIndicator
-                            animating={true}
-                            style={[{height: 80}]}
-                            size="small"
-                            />
-                        </View>
-                        ):(
-                        <View style={{flex:1, backgroundColor: '#F5F5F5', paddingTop:20}}>
-                            <ListView enableEmptySections={true}
-                            dataSource={this.state.ds.cloneWithRows(this.props.data)}
-                            renderRow={this.renderRow.bind(this)}/>
-                        </View>
-                        )}
-
-                    <ListView enableEmptySections={true}
-                              dataSource={this.state.ds.cloneWithRows(this.props.data)}
-                              renderRow={this.renderRow.bind(this)}/>
+                    {comp}
 
                 </Content>
 

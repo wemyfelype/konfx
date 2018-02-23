@@ -11,7 +11,7 @@ let dataState = { data: [], loading:true };
 const dataReducer = (state = dataState, action) => {
     switch (action.type) {
         case DATA_AVAILABLE:
-            return {...state, data: { data: action.data, loading:false }}
+            return {...state, data: action.data, loading:false }
         default:
             return state;
     }
