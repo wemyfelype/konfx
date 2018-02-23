@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import { Alert } from 'react-native';
+import { Provider } from 'react-redux';
+import { Alert, View } from 'react-native';
 import {createRootNavigator} from "./Routes";
 import {isSignedIn} from './auth/auth'
+import store from './store'; //Import the store
 
 export default class App extends Component{
 
@@ -23,12 +25,11 @@ export default class App extends Component{
     render() {
         const { checkedSignIn, signedIn } = this.state;
 
-        // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
-        if (!checkedSignIn) {
-            return null;
-        }
+        if (!checkedSignIn) { return null;}
 
         const Layout = createRootNavigator(signedIn);
-        return <Layout />;
+        return (<Provider store={store}>
+                    <Layout />
+                </Provider>);
     }
 }
