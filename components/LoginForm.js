@@ -17,6 +17,7 @@ export default ({navigation}) => (
                 keyboardType='email-address'
                 autoCapitalize='none'
                 autoCorrect={false}
+                ref={(input) => this.userInput = input}
             />
             <TextInput
                 style={styles.input}
@@ -28,7 +29,7 @@ export default ({navigation}) => (
         </View>
         <View style={{backgroundColor:'red', alignItems: 'center', justifyContent: 'center'}}>
             <Button title={'Login'}
-                    onPress={() => onSignIn().then(() => navigation.navigate("SignedIn"))} full>
+                    onPress={() => onSignIn({this.userInput, this.passwordInput}).then(() => navigation.navigate("SignedIn"))} full>
                 <Text style={styles.button}>Entrar </Text>
             </Button>
         </View>
