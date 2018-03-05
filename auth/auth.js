@@ -2,14 +2,17 @@
  * Created by jocelio on 18/02/18.
  */
 import { AsyncStorage } from "react-native";
-import { login } from "./../actions/login";
+import { login, userInfo } from "./../actions/login";
 
 export const USER_KEY = "auth-key";
 
 export const onSignIn = ({username, password}) => {
-  login({username, password}).then(r => {
-    console.log(r)
-    AsyncStorage.setItem(USER_KEY, loginData);
+  login({username, password}).then(loginData => {
+    console.log(loginData)
+    return loginData
+  }).then(loginData => userInfo(dataLogin.token)).then(user =>{
+    //store user data and token
+    AsyncStorage.setItem(USER_KEY, {...loginData, ...user});
   }).catch(e => {
     console.log(e)
   });
