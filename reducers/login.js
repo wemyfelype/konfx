@@ -5,7 +5,7 @@ export default (state = [], action) => {
 
     switch (action.type) {
         case DO_LOGIN:
-            return {...state, action.payload.data};
+            return {...state, login:action.payload.data}
         default:
             return state;
 
