@@ -3,8 +3,9 @@
  */
 
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
+import ReduxPromise from 'redux-promise'
 
 import reducers from './reducers/index';
 
-export default createStore(reducers, applyMiddleware(thunk));
+export default applyMiddleware(ReduxPromise)(createStore)(reducers);
