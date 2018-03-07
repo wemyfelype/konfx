@@ -20,7 +20,7 @@ class LoginForm extends Component {
                     keyboardType='email-address'
                     autoCapitalize='none'
                     autoCorrect={false}
-                    ref={(input) => this.userInput = input}
+                    onChangeText={(user) => this.setState({user})}
                 />
                 <TextInput
                     style={styles.input}
@@ -28,6 +28,7 @@ class LoginForm extends Component {
                     returnKeyType='go'
                     secureTextEntry
                     ref={(input) => this.passwordInput = input}
+                    onChangeText={(password) => this.setState({password})}
                 />
             </View>
             <View style={{backgroundColor: 'red', alignItems: 'center', justifyContent: 'center'}}>
@@ -41,8 +42,8 @@ class LoginForm extends Component {
 
     doLogin(){
         login({
-            "username": this.userInput,
-            "password": this.passwordInput
+            "username": this.state.user,
+            "password": this.state.password
         })
         onSignIn().then(() => this.props.navigation.navigate("SignedIn"))
     }
