@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Alert, View } from 'react-native';
 import {createRootNavigator} from "./Routes";
 import {isSignedIn} from './auth/auth'
-import store from './store'; //Import the store
+import store from './store';
 
 export default class App extends Component{
 

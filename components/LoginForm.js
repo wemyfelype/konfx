@@ -9,6 +9,12 @@ import { login } from "../actions/login";
 import { connect } from "react-redux";
 
 class LoginForm extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {user:''}
+    }
+
     render() {
        return <View style={styles.container}>
             <View>
@@ -21,6 +27,7 @@ class LoginForm extends Component {
                     autoCapitalize='none'
                     autoCorrect={false}
                     onChangeText={(user) => this.setState({user})}
+
                 />
                 <TextInput
                     style={styles.input}
@@ -41,11 +48,18 @@ class LoginForm extends Component {
     }
 
     doLogin(){
-        login({
-            "username": this.state.user,
-            "password": this.state.password
+        this.props.login({
+            "username": this.state.user || 'jclls@hotmail.com',
+            "password": this.state.password || 'Z'
+        }).then( r => {
+            console.log(r.payload.data)
+            if (r.payload.data.access_token) {
+                this.props.navigation.navigate("SignedIn")
+            }
         })
-        onSignIn().then(() => this.props.navigation.navigate("SignedIn"))
+        //     .then(r =>
+        // ).catch( e => console.log(e))
+        // onSignIn()
     }
 }
 
@@ -57,7 +71,7 @@ function mapStateToProps(state, props) {
 }
 
 
-export default connect(mapStateToProps, {login})(LoginForm)
+export default connect(mapStateToProps, { login })(LoginForm)
 
 
 const styles = StyleSheet.create({
