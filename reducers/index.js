@@ -4,6 +4,8 @@
 
 import { combineReducers } from 'redux';
 
+import LoginReducer from './login'
+
 import { DATA_AVAILABLE } from "../actions/"
 
 let dataState = { data: [], loading:true };
@@ -19,7 +21,9 @@ const dataReducer = (state = dataState, action) => {
 
 
 const rootReducer = combineReducers({
-    dataReducer
+    state: (state = {}) => state,
+    dataReducer: dataReducer,
+    loginReducer: LoginReducer
 })
 
 export default rootReducer;

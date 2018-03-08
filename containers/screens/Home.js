@@ -72,7 +72,7 @@ class Home extends Component {
 
     renderRow(rowData, sectionID, rowID) {
         return (
-            <View style={styles.row}>
+            <View style={styles.row} key={rowData.description}>
                 <Text style={styles.title}>
                     {(parseInt(rowID) + 1)}{". "}{rowData.title}
                 </Text>
